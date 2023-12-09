@@ -1,0 +1,18 @@
+<% include("./head.ejs") %>
+<% if (typeof error !== 'undefined' && error) { %><div><%- error %></div><% } %>
+        <form method="POST" action="/register">
+            <label for="email">E-mail
+                <input type="email" name="email">
+            </label>
+            <label for="username">Username
+                <input type="text" name="username">
+            </label>
+            <label for="password">Password
+                <input type="password" name="password">
+            </label>
+            <label for="repeatPassword">Repeat password
+                <input type="password" name="repeatPassword">
+            </label>
+            <button type="submit">Log in</button>
+        </form>
+<% include("./footer.ejs") %>

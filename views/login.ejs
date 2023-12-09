@@ -1,0 +1,12 @@
+<% include('./head'); %>
+<% if (typeof error !== 'undefined' && error) { %><div><%- error %></div><% } %>
+        <form method="POST">
+            <label for="username">Username
+                <input type="text" name="username">
+            </label>
+            <label for="password">Password
+                <input type="password" name="password">
+            </label>
+            <button type="submit">Log in</button>
+        </form>
+<%- include('./footer'); %>
