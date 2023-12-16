@@ -78,7 +78,7 @@ app.post('/dashboard/change-password', (req, res) => {
     const repeatNewPassword = req.body.repeatNewPassword
 
     if (newPassword !== repeatNewPassword) {
-        res.redirect("/register?error=Error:+Passwords+doesn't+match")
+        res.redirect("/register?error=Error:+Passwords+does+not+match")
         return
     }
     try {
