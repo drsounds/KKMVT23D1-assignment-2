@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const { randomUUID } = require('crypto'); // Added in: node v14.17.0
 const cookieParser = require("cookie-parser");
 var session = require('express-session')
-const { login, registerUser, changePassword } = require('./users');
+const { login, clearUsers, registerUser, changePassword } = require('./users');
 
 const app = express();
 app.use(cookieParser());
@@ -37,7 +37,8 @@ app.post('/login', (req, res) => {
 })
 
 app.get('/register', (req, res) => {
-    res.render('register')
+    const error = req.query.error
+    res.render('register', { error })
 })
 
 app.get('/dashboard/change-password', (req, res) => {
@@ -77,7 +78,7 @@ app.post('/dashboard/change-password', (req, res) => {
     const repeatNewPassword = req.body.repeatNewPassword
 
     if (newPassword !== repeatNewPassword) {
-        res.redirect("/register?error=Error:+passwords+doesn't+match")
+        res.redirect("/register?error=Error:+Passwords+doesn't+match")
         return
     }
     try {
@@ -101,13 +102,18 @@ app.get('/dashboard', (req, res) => {
     res.render("logged-in", { user, error })
 })
 
+app.post('/clear', (req, res) => {
+    clearUsers()
+    res.json({ cleared: true })
+})
+
 app.post('/register', (req, res) => {
     const email = req.body.email 
     const username = req.body.username
     const password = req.body.password
     const repeatPassword = req.body.repeatPassword
     if (password !== repeatPassword) {
-        return res.redirect("/register?error=Error:+Passwords+doesn't+match")
+        return res.redirect("/register?error=Error:+Passwords+does+not+match")
     }
     console.log("Registering user ", username)
     try {

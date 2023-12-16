@@ -19,6 +19,10 @@ function saveUsers(users) {
     fs.writeFileSync(filename, JSON.stringify(users))
 }
 
+function clearUsers() {
+    saveUsers({})
+}
+
 function changePassword(username, password, newPassword) {
     const users = loadUsers()
     console.log("username", username)
@@ -70,5 +74,6 @@ module.exports = {
     registerUser,
     loadUsers,
     login,
+    clearUsers,
     changePassword
 }

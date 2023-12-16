@@ -7,7 +7,8 @@ describe('template spec', () => {
       email: faker.internet.email(),
       username: faker.internet.userName(),
       password: faker.internet.password()
-    } 
+    }
+    cy.request('POST', 'http://localhost:8000/clear')
     cy.visit('http://localhost:8000/register')
     for (let k of ['email', 'username', 'password']) {
       cy.get('input[name="' + k + '"]')
